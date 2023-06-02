@@ -65,6 +65,7 @@ h500(text, double size,
       text,
       textAlign: align,
       style: TextStyle(
+        height: 1.5,
         fontSize: size,
         fontWeight: FontWeight.w500,
         color: color,
