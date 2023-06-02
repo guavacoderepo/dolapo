@@ -4,9 +4,8 @@ import 'package:dolapo/utilities/fonts.dart';
 import 'package:dolapo/constants/images.dart';
 import 'package:dolapo/utilities/button.dart';
 import 'package:dolapo/utilities/spacer.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -179,6 +178,52 @@ class _HomePageState extends State<HomePage> {
                           .toList(),
                     ),
                   ),
+// footer section
+                  Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    color: appColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 70),
+                          child: h400(
+                            "Ready to bring your digital vision to life? Let's collaborate and create something amazing together. Get in touch with me today!",
+                            18,
+                            align: TextAlign.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 140),
+                          child: Divider(
+                            color: grey,
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            shadowColor: transparent,
+                            backgroundColor: transparent,
+                            foregroundColor: transparent,
+                          ),
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.mail_outline_outlined,
+                            color: blue,
+                          ),
+                          label:
+                              h400("Anikejikareem@gmail.com", 18, color: blue),
+                        ),
+                        // Row(
+                        //   children: [
+                        //     IconButton(onPressed: (){}, icon: FaIcon())
+                        //   ],
+                        // )
+                      ],
+                    ),
+                  )
 
 // widgets here
                 ],
