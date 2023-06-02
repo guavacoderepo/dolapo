@@ -50,6 +50,7 @@ h400(text, double size,
       text,
       textAlign: align,
       style: TextStyle(
+        height: 1.5,
         fontSize: size,
         fontWeight: FontWeight.w400,
         color: color,
