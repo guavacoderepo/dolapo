@@ -1,9 +1,14 @@
 import 'package:dolapo/constants/colors.dart';
 import 'package:dolapo/models/projectsModel.dart';
+import 'package:dolapo/screens/about.dart';
+import 'package:dolapo/screens/contact.dart';
+import 'package:dolapo/screens/view.dart';
 import 'package:dolapo/utilities/fonts.dart';
 import 'package:dolapo/constants/images.dart';
 import 'package:dolapo/utilities/button.dart';
+import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
+import 'package:dolapo/variables/projects.dart';
 import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,39 +20,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> navItems = [
-    navButton("Home", () {}),
-    navButton("About me", () {}),
-    navButton("Contact me", () {}),
-    navButton("Playground", () {}),
-  ];
-
   bool mobile = false;
   double size = 0;
-  double maxdestop = 1029;
+  double maxdestop = 1040;
   double maxmobile = 855;
 
-  List<ProjectsModel> projectList = [
-    ProjectsModel(
-        0,
-        "STOCKOPEDIA",
-        "Stockopedia is a mobile app that helps users to invest smarter and better",
-        "assets/images/stockopedia.png"),
-    ProjectsModel(1, "FOOYEE", "Book your website with no stress",
-        "assets/images/fooyee.png"),
-    ProjectsModel(2, "FOOYEE ", "Book your website with no stress",
-        "assets/images/fooyee2.png"),
-    ProjectsModel(
-        3,
-        "KRYPTAL",
-        "Web3 centralized cryptocurrency trading platform",
-        "assets/images/kryptal.png"),
-    ProjectsModel(4, "MIEZ", "Luxurious spa and beauty saloon website",
-        "assets/images/miez.png")
-  ];
+  List<ProjectsModel>? projectList;
 
   @override
   void initState() {
+    projectList = projects;
     super.initState();
   }
 
@@ -56,10 +38,19 @@ class _HomePageState extends State<HomePage> {
     size = MediaQuery.of(context).size.width;
     mobile = MediaQuery.of(context).size.width > maxmobile ? false : true;
     return Scaffold(
+      backgroundColor: light,
       // appabr section
       appBar: AppBar(
         title: Image.asset(logo, fit: BoxFit.contain, height: 40),
-        actions: mobile ? null : navItems,
+        actions: mobile
+            ? null
+            : [
+                navButton("Home", () => push(context, const HomePage()),
+                    btnColor: blue),
+                navButton("About me", () => push(context, const About())),
+                navButton("Contact me", () => push(context, const Contact())),
+                navButton("Playground", () {}),
+              ],
         backgroundColor: appColor,
         elevation: 0,
       ),
@@ -68,7 +59,13 @@ class _HomePageState extends State<HomePage> {
 
       drawer: mobile
           ? Drawer(
-              child: ListView(children: navItems),
+              child: ListView(children: [
+                navButton("Home", () => push(context, const HomePage()),
+                    btnColor: blue),
+                navButton("About me", () => push(context, const About())),
+                navButton("Contact me", () => push(context, const Contact())),
+                navButton("Playground", () {}),
+              ]),
             )
           : null,
       body: LayoutBuilder(
@@ -148,10 +145,11 @@ class _HomePageState extends State<HomePage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: size > maxdestop ? 30 : 20),
+                        horizontal: size > maxdestop ? 90 : 50),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: projectList
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: projectList!
                           .map(
                             (e) => (e.id % 2) == 0
                                 ? Row(
@@ -251,8 +249,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   listImg(cnx, ProjectsModel e) => Container(
-        width: cnx.maxWidth * 0.52,
-        height: cnx.maxWidth * 0.45,
+        width: cnx.maxWidth * 0.4,
+        height: cnx.maxWidth * 0.4,
         margin: const EdgeInsets.symmetric(vertical: 15),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -261,17 +259,18 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Image.asset(
           e.img,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
       );
 
   listDescription(cnx, ProjectsModel e) => Container(
         margin: const EdgeInsets.symmetric(vertical: 15),
-        height: cnx.maxWidth * 0.45,
-        width: cnx.maxWidth * 0.4,
+        height: cnx.maxWidth * 0.4,
+        width: cnx.maxWidth * 0.425,
+        // color: Colors.amber,
         padding: (e.id % 2) == 0
-            ? const EdgeInsets.only(left: 50)
-            : const EdgeInsets.only(right: 50),
+            ? const EdgeInsets.only(left: 5)
+            : const EdgeInsets.only(left: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -279,27 +278,30 @@ class _HomePageState extends State<HomePage> {
 
             SizedBox(
               width: cnx.maxWidth * 0.4,
-              child: h500(e.title, size > maxdestop ? 35 : 30, color: blue),
+              child: h500(e.title, size > maxdestop ? 25 : 20, color: blue),
             ),
             // description
             SizedBox(
               width: cnx.maxWidth * 0.4,
-              child: h500(e.desc, size > maxdestop ? 25 : 20,
-                  color: appColor.withOpacity(0.5)),
+              child: h500(e.desc, size > maxdestop ? 24 : 20,
+                  color: appColor.withOpacity(0.7)),
             ),
             // view project
+
             SizedBox(
               width: cnx.maxWidth * 0.4,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                    shadowColor: transparent,
-                    backgroundColor: transparent,
-                    foregroundColor: transparent,
-                    padding: EdgeInsets.zero),
-                onPressed: () {},
-                icon: Icon(Icons.edit_square, color: grey),
-                label: h500("View case study", size > maxdestop ? 25 : 20,
-                    color: blue),
+              child: InkWell(
+                onTap: () => push(context, Viewproject(e)),
+                focusColor: transparent,
+                hoverColor: transparent,
+                child: Row(
+                  children: [
+                    Icon(Icons.mode_edit_outline_outlined, color: grey),
+                    horizontal(5),
+                    h500("View case study", size > maxdestop ? 25 : 20,
+                        color: blue),
+                  ],
+                ),
               ),
             )
           ],
