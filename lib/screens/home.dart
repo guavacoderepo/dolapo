@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: light,
       // appabr section
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Image.asset(logo, fit: BoxFit.contain, height: 40),
         actions: mobile
             ? null
@@ -106,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                     size > maxdestop ? 28 : 24,
                                     color: blue),
                                 const Spacer(flex: 2),
-                                submitbutton("Download Resume", () {})
+                                submitbutton("View my resume", () {})
                               ],
                             ),
                           ),
@@ -214,11 +215,30 @@ class _HomePageState extends State<HomePage> {
                           label:
                               h400("Anikejikareem@gmail.com", 18, color: blue),
                         ),
-                        // Row(
-                        //   children: [
-                        //     IconButton(onPressed: (){}, icon: FaIcon())
-                        //   ],
-                        // )
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: transparent,
+                                backgroundColor: transparent,
+                                foregroundColor: transparent,
+                              ),
+                              child: Image.asset("assets/icons/Twitter.png"),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: transparent,
+                                backgroundColor: transparent,
+                                foregroundColor: transparent,
+                              ),
+                              child: Image.asset("assets/icons/LinkedIn .png"),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   )
@@ -250,7 +270,7 @@ class _HomePageState extends State<HomePage> {
 
   listImg(cnx, ProjectsModel e) => Container(
         width: cnx.maxWidth * 0.4,
-        height: cnx.maxWidth * 0.4,
+        height: cnx.maxWidth * 0.3,
         margin: const EdgeInsets.symmetric(vertical: 15),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -265,7 +285,7 @@ class _HomePageState extends State<HomePage> {
 
   listDescription(cnx, ProjectsModel e) => Container(
         margin: const EdgeInsets.symmetric(vertical: 15),
-        height: cnx.maxWidth * 0.4,
+        height: cnx.maxWidth * 0.3,
         width: cnx.maxWidth * 0.425,
         // color: Colors.amber,
         padding: (e.id % 2) == 0
@@ -278,12 +298,12 @@ class _HomePageState extends State<HomePage> {
 
             SizedBox(
               width: cnx.maxWidth * 0.4,
-              child: h500(e.title, size > maxdestop ? 25 : 20, color: blue),
+              child: h500(e.title, size > maxdestop ? 23 : 19, color: blue),
             ),
             // description
             SizedBox(
               width: cnx.maxWidth * 0.4,
-              child: h500(e.desc, size > maxdestop ? 24 : 20,
+              child: h500(e.desc, size > maxdestop ? 22 : 15,
                   color: appColor.withOpacity(0.7)),
             ),
             // view project
@@ -298,7 +318,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Icon(Icons.mode_edit_outline_outlined, color: grey),
                     horizontal(5),
-                    h500("View case study", size > maxdestop ? 25 : 20,
+                    h500("View case study", size > maxdestop ? 22 : 18,
                         color: blue),
                   ],
                 ),

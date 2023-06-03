@@ -26,37 +26,39 @@ class _ContactState extends State<Contact> {
     size = MediaQuery.of(context).size.width;
     mobile = MediaQuery.of(context).size.width > maxmobile ? false : true;
     return Scaffold(
+      backgroundColor: appColor,
+      // appabr section
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Image.asset(logo, fit: BoxFit.contain, height: 40),
+        actions: mobile
+            ? null
+            : [
+                navButton("Home", () => push(context, const HomePage())),
+                navButton("About me", () => push(context, const About())),
+                navButton("Contact me", () => push(context, const Contact()),
+                    btnColor: blue),
+                navButton("Playground", () {}),
+              ],
         backgroundColor: appColor,
-        // appabr section
-        appBar: AppBar(
-          title: Image.asset(logo, fit: BoxFit.contain, height: 40),
-          actions: mobile
-              ? null
-              : [
-                  navButton("Home", () => push(context, const HomePage())),
-                  navButton("About me", () => push(context, const About())),
-                  navButton("Contact me", () => push(context, const Contact()),
-                      btnColor: blue),
-                  navButton("Playground", () {}),
-                ],
-          backgroundColor: appColor,
-          elevation: 0,
-        ),
+        elevation: 0,
+      ),
 
-        // drawer section
+      // drawer section
 
-        drawer: mobile
-            ? Drawer(
-                child: ListView(children: [
-                  navButton("Home", () => push(context, const HomePage())),
-                  navButton("About me", () => push(context, const About())),
-                  navButton("Contact me", () => push(context, const Contact()),
-                      btnColor: blue),
-                  navButton("Playground", () {}),
-                ]),
-              )
-            : null,
-        body: LayoutBuilder(builder: (context, cnx) {
+      drawer: mobile
+          ? Drawer(
+              child: ListView(children: [
+                navButton("Home", () => push(context, const HomePage())),
+                navButton("About me", () => push(context, const About())),
+                navButton("Contact me", () => push(context, const Contact()),
+                    btnColor: blue),
+                navButton("Playground", () {}),
+              ]),
+            )
+          : null,
+      body: LayoutBuilder(
+        builder: (context, cnx) {
           if (cnx.maxWidth > maxmobile) {
             return SingleChildScrollView(
               child: Padding(
@@ -66,30 +68,30 @@ class _ContactState extends State<Contact> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // row section
                   children: [
-                    // vertical(50),
+                    vertical(20),
                     h500("Contact me", size > maxdestop ? 40 : 30, color: blue),
                     vertical(30),
 
                     h400(
                       "I would love to hear from you! Whether you have a project in mind, want to discuss a collaboration, or simply have a question, feel free to reach out.",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
                     vertical(20),
 
                     h400(
                       "With a passion for UI/UX design and a commitment to creating exceptional digital experiences, I am dedicated to bringing your vision to life. Let's work together to make something amazing.",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 181,
                     ),
                     vertical(20),
 
                     h400(
                       "You can reach me by email at Anikejikareem@gmail.com or through twitter or linkedin. I strive to respond promptly and look forward to connecting with you.",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
                     vertical(20),
                     h400(
                       "Let's turn ideas into reality. Get in touch and let's create something extraordinary!",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
 
                     vertical(100),
@@ -133,11 +135,31 @@ class _ContactState extends State<Contact> {
                             label: h400("Anikejikareem@gmail.com", 18,
                                 color: blue),
                           ),
-                          // Row(
-                          //   children: [
-                          //     IconButton(onPressed: (){}, icon: FaIcon())
-                          //   ],
-                          // )
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  shadowColor: transparent,
+                                  backgroundColor: transparent,
+                                  foregroundColor: transparent,
+                                ),
+                                child: Image.asset("assets/icons/Twitter.png"),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  shadowColor: transparent,
+                                  backgroundColor: transparent,
+                                  foregroundColor: transparent,
+                                ),
+                                child:
+                                    Image.asset("assets/icons/LinkedIn .png"),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     )
@@ -163,6 +185,8 @@ class _ContactState extends State<Contact> {
               ),
             );
           }
-        }));
+        },
+      ),
+    );
   }
 }

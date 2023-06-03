@@ -26,37 +26,39 @@ class _AboutState extends State<About> {
     size = MediaQuery.of(context).size.width;
     mobile = MediaQuery.of(context).size.width > maxmobile ? false : true;
     return Scaffold(
+      backgroundColor: appColor,
+      // appabr section
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Image.asset(logo, fit: BoxFit.contain, height: 40),
+        actions: mobile
+            ? null
+            : [
+                navButton("Home", () => push(context, const HomePage())),
+                navButton("About me", () => push(context, const About()),
+                    btnColor: blue),
+                navButton("Contact me", () => push(context, const Contact())),
+                navButton("Playground", () {}),
+              ],
         backgroundColor: appColor,
-        // appabr section
-        appBar: AppBar(
-          title: Image.asset(logo, fit: BoxFit.contain, height: 40),
-          actions: mobile
-              ? null
-              : [
-                  navButton("Home", () => push(context, const HomePage())),
-                  navButton("About me", () => push(context, const About()),
-                      btnColor: blue),
-                  navButton("Contact me", () => push(context, const Contact())),
-                  navButton("Playground", () {}),
-                ],
-          backgroundColor: appColor,
-          elevation: 0,
-        ),
+        elevation: 0,
+      ),
 
-        // drawer section
+      // drawer section
 
-        drawer: mobile
-            ? Drawer(
-                child: ListView(children: [
-                  navButton("Home", () => push(context, const HomePage())),
-                  navButton("About me", () => push(context, const About()),
-                      btnColor: blue),
-                  navButton("Contact me", () => push(context, const Contact())),
-                  navButton("Playground", () {}),
-                ]),
-              )
-            : null,
-        body: LayoutBuilder(builder: (context, cnx) {
+      drawer: mobile
+          ? Drawer(
+              child: ListView(children: [
+                navButton("Home", () => push(context, const HomePage())),
+                navButton("About me", () => push(context, const About()),
+                    btnColor: blue),
+                navButton("Contact me", () => push(context, const Contact())),
+                navButton("Playground", () {}),
+              ]),
+            )
+          : null,
+      body: LayoutBuilder(
+        builder: (context, cnx) {
           if (cnx.maxWidth > maxmobile) {
             return SingleChildScrollView(
               child: Column(
@@ -83,7 +85,7 @@ class _AboutState extends State<About> {
                           width: MediaQuery.of(context).size.width * 0.55,
                           child: h400(
                             "Hi, I'm Dolapo, a UI/UX designer dedicated to crafting captivating digital experiences. With a user-centered approach and a passion for problem-solving, I create stunning interfaces that delight users.",
-                            size > maxdestop ? 30 : 21,
+                            size > maxdestop ? 28 : 18,
                           ),
                         )
                       ],
@@ -97,7 +99,7 @@ class _AboutState extends State<About> {
                         vertical: 10, horizontal: 80),
                     child: h400(
                       "With expertise in user research, wireframing, and polished interface design, I strive to blend aesthetics and functionality seamlessly.",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
                   ),
 
@@ -106,7 +108,7 @@ class _AboutState extends State<About> {
                         vertical: 10, horizontal: 80),
                     child: h400(
                       "I understand the power of concise and compelling copy as a UX writer, creating cohesive narratives that enhance the overall user experience.",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
                   ),
 
@@ -115,7 +117,7 @@ class _AboutState extends State<About> {
                         vertical: 10, horizontal: 80),
                     child: h400(
                       "Collaboration, empathy, and a deep understanding of users drive my design process. ",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
                   ),
                   Padding(
@@ -123,7 +125,7 @@ class _AboutState extends State<About> {
                         vertical: 10, horizontal: 80),
                     child: h400(
                       "Let's collaborate to bring your digital vision to life and create exceptional designs together. Reach out to me today.",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
                   ),
                   Padding(
@@ -131,7 +133,7 @@ class _AboutState extends State<About> {
                         vertical: 10, horizontal: 80),
                     child: h400(
                       "With expertise in user research, wireframing, and polished interface design, I strive to blend aesthetics and functionality seamlessly.",
-                      size > maxdestop ? 28 : 21,
+                      size > maxdestop ? 25 : 18,
                     ),
                   ),
                   vertical(100),
@@ -174,11 +176,30 @@ class _AboutState extends State<About> {
                           label:
                               h400("Anikejikareem@gmail.com", 18, color: blue),
                         ),
-                        // Row(
-                        //   children: [
-                        //     IconButton(onPressed: (){}, icon: FaIcon())
-                        //   ],
-                        // )
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: transparent,
+                                backgroundColor: transparent,
+                                foregroundColor: transparent,
+                              ),
+                              child: Image.asset("assets/icons/Twitter.png"),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: transparent,
+                                backgroundColor: transparent,
+                                foregroundColor: transparent,
+                              ),
+                              child: Image.asset("assets/icons/LinkedIn .png"),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   )
@@ -203,6 +224,8 @@ class _AboutState extends State<About> {
               ),
             );
           }
-        }));
+        },
+      ),
+    );
   }
 }
