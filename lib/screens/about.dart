@@ -7,6 +7,7 @@ import 'package:dolapo/utilities/fonts.dart';
 import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatefulWidget {
   const About({super.key});
@@ -168,7 +169,10 @@ class _AboutState extends State<About> {
                             backgroundColor: transparent,
                             foregroundColor: transparent,
                           ),
-                          onPressed: () {},
+                          onPressed: () async => await canLaunchUrl(Uri(
+                            scheme: 'mailto',
+                            path: 'Anikejikareem@gmail.com',
+                          )),
                           icon: Icon(
                             Icons.mail_outline_outlined,
                             color: blue,
@@ -181,7 +185,8 @@ class _AboutState extends State<About> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _launchUrl(
+                                  "https://mobile.twitter.com/Dolapo_writes"),
                               style: ElevatedButton.styleFrom(
                                 shadowColor: transparent,
                                 backgroundColor: transparent,
@@ -190,7 +195,8 @@ class _AboutState extends State<About> {
                               child: Image.asset("assets/icons/Twitter.png"),
                             ),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _launchUrl(
+                                  "https://www.linkedin.com/in/dolapouiuxdesigner"),
                               style: ElevatedButton.styleFrom(
                                 shadowColor: transparent,
                                 backgroundColor: transparent,
@@ -227,5 +233,11 @@ class _AboutState extends State<About> {
         },
       ),
     );
+  }
+}
+
+Future<void> _launchUrl(_url) async {
+  if (!await launchUrl(Uri.parse(_url))) {
+    throw Exception('Could not launch $_url');
   }
 }

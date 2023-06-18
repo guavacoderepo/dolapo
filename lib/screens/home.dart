@@ -10,7 +10,7 @@ import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:dolapo/variables/projects.dart';
 import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -112,7 +112,11 @@ class _HomePageState extends State<HomePage> {
                                     size > maxdestop ? 28 : 24,
                                     color: blue),
                                 const Spacer(flex: 2),
-                                submitbutton("View my resume", () {})
+                                submitbutton(
+                                  "View my resume",
+                                  () => _launchUrl(
+                                      "https://resume.io/r/JGGsUqAv7"),
+                                )
                               ],
                             ),
                           ),
@@ -233,7 +237,10 @@ class _HomePageState extends State<HomePage> {
                             backgroundColor: transparent,
                             foregroundColor: transparent,
                           ),
-                          onPressed: () {},
+                          onPressed: () async => await canLaunchUrl(Uri(
+                            scheme: 'mailto',
+                            path: 'Anikejikareem@gmail.com',
+                          )),
                           icon: Icon(
                             Icons.mail_outline_outlined,
                             color: blue,
@@ -246,7 +253,8 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _launchUrl(
+                                  "https://mobile.twitter.com/Dolapo_writes"),
                               style: ElevatedButton.styleFrom(
                                 shadowColor: transparent,
                                 backgroundColor: transparent,
@@ -255,7 +263,8 @@ class _HomePageState extends State<HomePage> {
                               child: Image.asset("assets/icons/Twitter.png"),
                             ),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _launchUrl(
+                                  "https://www.linkedin.com/in/dolapouiuxdesigner"),
                               style: ElevatedButton.styleFrom(
                                 shadowColor: transparent,
                                 backgroundColor: transparent,
@@ -337,7 +346,9 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               width: cnx.maxWidth * 0.4,
               child: InkWell(
-                onTap: () => push(context, Viewproject(e)),
+                onTap: e.link
+                    ? () => _launchUrl("https://caselaw.moj.dl.gov.ng/")
+                    : () => push(context, Viewproject(e)),
                 focusColor: transparent,
                 hoverColor: transparent,
                 child: Row(
@@ -357,4 +368,10 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       );
+}
+
+Future<void> _launchUrl(url) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
+  }
 }
