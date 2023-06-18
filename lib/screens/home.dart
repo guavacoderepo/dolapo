@@ -79,10 +79,15 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // top card
                   Container(
-                    color: appColor,
                     height: MediaQuery.of(context).size.height * 0.7,
                     width: double.infinity,
                     padding: const EdgeInsets.all(45),
+                    decoration: BoxDecoration(
+                      color: appColor,
+                      image: const DecorationImage(
+                        image: AssetImage("assets/images/topdooo.png"),
+                      ),
+                    ),
                     // row contents
                     child: Row(
                       // crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,6 +148,27 @@ class _HomePageState extends State<HomePage> {
                   ),
 
 // project listing
+// one side alignment project listing
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(
+                  //       horizontal: size > maxdestop ? 90 : 50),
+                  //   child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: projectList!
+                  //         .map((e) => Row(
+                  //               mainAxisAlignment:
+                  //                   MainAxisAlignment.spaceBetween,
+                  //               children: [
+                  //                 // thumbnail section
+                  //                 listImg(cnx, e),
+                  //                 // description section
+                  //                 listDescription(cnx, e),
+                  //               ],
+                  //             ))
+                  //         .toList(),
+                  //   ),
+                  // ),
 
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -316,10 +342,14 @@ class _HomePageState extends State<HomePage> {
                 hoverColor: transparent,
                 child: Row(
                   children: [
-                    Icon(Icons.mode_edit_outline_outlined, color: grey),
+                    e.link
+                        ? Icon(Icons.link, color: grey)
+                        : Icon(Icons.mode_edit_outline_outlined, color: grey),
                     horizontal(5),
-                    h500("View case study", size > maxdestop ? 22 : 18,
-                        color: blue),
+                    e.link
+                        ? h500("Link", size > maxdestop ? 22 : 18, color: blue)
+                        : h500("View case study", size > maxdestop ? 22 : 18,
+                            color: blue),
                   ],
                 ),
               ),
