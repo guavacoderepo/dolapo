@@ -162,11 +162,38 @@ class _AboutState extends State<About> {
                         physics: const NeverScrollableScrollPhysics(),
                         builder: (ctx, index) {
                           return SizedBox(
-                            child: Image.asset(
-                                "assets/images/rec${index - 1}.png"),
+                            child: Image.asset("assets/images/rec$index.png"),
                           );
                         }),
                   ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 27, vertical: 20),
+                    child: h500(
+                      "Certifications",
+                      size > maxdestop ? 35 : 25,
+                      color: blue,
+                    ),
+                  ),
+//
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 80),
+                    child: DynamicHeightGridView(
+                        itemCount: 2,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        builder: (ctx, index) {
+                          return SizedBox(
+                            child: Image.asset("assets/images/cert$index.png"),
+                          );
+                        }),
+                  ),
+
                   // footer section
 
                   Container(
