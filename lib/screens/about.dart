@@ -8,6 +8,7 @@ import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 
 class About extends StatefulWidget {
   const About({super.key});
@@ -99,7 +100,7 @@ class _AboutState extends State<About> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 80),
                     child: h400(
-                      "With expertise in user research, wireframing, and polished interface design, I strive to blend aesthetics and functionality seamlessly.",
+                      "With expertise in user research, wireframing, polished interface design and UX Writing, I strive to blend aesthetics and functionality seamlessly.",
                       size > maxdestop ? 25 : 18,
                     ),
                   ),
@@ -108,7 +109,7 @@ class _AboutState extends State<About> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 80),
                     child: h400(
-                      "I understand the power of concise and compelling copy as a UX writer, creating cohesive narratives that enhance the overall user experience.",
+                      "I understand the power of combining design and engaging content as a professional, to create an innovative product that user will find useful",
                       size > maxdestop ? 25 : 18,
                     ),
                   ),
@@ -129,15 +130,43 @@ class _AboutState extends State<About> {
                       size > maxdestop ? 25 : 18,
                     ),
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //       vertical: 10, horizontal: 80),
+                  //   child: h400(
+                  //     "With expertise in user research, wireframing, and polished interface design, I strive to blend aesthetics and functionality seamlessly.",
+                  //     size > maxdestop ? 25 : 18,
+                  //   ),
+                  // ),
+                  vertical(30),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 27, vertical: 20),
+                    child: h500(
+                      "Recommendations",
+                      size > maxdestop ? 35 : 25,
+                      color: blue,
+                    ),
+                  ),
+//
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 80),
-                    child: h400(
-                      "With expertise in user research, wireframing, and polished interface design, I strive to blend aesthetics and functionality seamlessly.",
-                      size > maxdestop ? 25 : 18,
-                    ),
+                    child: DynamicHeightGridView(
+                        itemCount: 4,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        builder: (ctx, index) {
+                          return SizedBox(
+                            child: Image.asset(
+                                "assets/images/rec${index - 1}.png"),
+                          );
+                        }),
                   ),
-                  vertical(100),
                   // footer section
 
                   Container(
@@ -241,3 +270,14 @@ Future<void> _launchUrl(_url) async {
     throw Exception('Could not launch $_url');
   }
 }
+
+grideView() => DynamicHeightGridView(
+    itemCount: 120,
+    crossAxisCount: 3,
+    crossAxisSpacing: 10,
+    mainAxisSpacing: 10,
+    builder: (ctx, index) {
+      return SizedBox(
+        child: Image.asset("assets/images/IMG_2694 1.png"),
+      );
+    });
