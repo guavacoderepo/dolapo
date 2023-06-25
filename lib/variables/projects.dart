@@ -10,7 +10,7 @@ List<ProjectsModel> projects = [
     Metas("", "", "", []),
     true,
   ),
-
+// stokopedia
   ProjectsModel(
       1,
       "STOCKOPEDIA: A stock investment mobile app",
@@ -44,8 +44,8 @@ List<ProjectsModel> projects = [
 // healthpal
   ProjectsModel(
     2,
-    "Healthpal - Revolutionizing Healthcare Access in Nigeria",
-    "A hotel booking website that offers a convenient way to book the perfect accommodations",
+    "Healthpal - Revolutionizing Healthcare Access in Nigeria (Desktop View)",
+    "Healthpal is transforming the way Nigerians access medical care, making it more accessible, convenient, and personalized for everyone.",
     "assets/images/health.png",
     Metas("3 weeks", "Sole UI/UX Designer",
         "Research, UI Design, UX Design, Responsive web design ", [
@@ -72,9 +72,31 @@ List<ProjectsModel> projects = [
     false,
   ),
 
-  // project two
+  // healthpal mobile
   ProjectsModel(
     3,
+    "Healthpal - Revolutionizing Healthcare Access in Nigeria (Mobile View)",
+    "Healthpal is transforming the way Nigerians access medical care, making it more accessible, convenient, and personalized for everyone.",
+    "assets/images/hpalmobil.png",
+    Metas("3 weeks", "Sole UI/UX Designer",
+        "Research, UI Design, UX Design, Responsive web design ", [
+      "assets/prj/hpal1.png",
+      "assets/prj/hpal2.png",
+      "assets/prj/hpal3.png",
+      "assets/prj/hpal4.png",
+      "assets/prj/hpal5.png",
+      "assets/prj/hpal6.png",
+      "assets/prj/hpal7.png",
+      "assets/prj/hpal8.png",
+      "assets/prj/hpal9.png",
+      "assets/prj/hpal10.png",
+    ]),
+    false,
+  ),
+
+  // feyoo web
+  ProjectsModel(
+    4,
     "Fooyee: Designing a Hotel Booking Website for Unforgettable Experiences (Desktop version)",
     "A hotel booking website that offers a convenient way to book the perfect accommodations ",
     "assets/images/fooyee.png",
@@ -90,7 +112,7 @@ List<ProjectsModel> projects = [
 
   // fooyee mobile
   ProjectsModel(
-    4,
+    5,
     "Fooyee: Designing a Hotel Booking Website for Unforgettable Experiences (Mobile version) ",
     "A hotel booking website that offers a convenient way to book the perfect accommodations ",
     "assets/images/fooyee2.png",
@@ -106,7 +128,7 @@ List<ProjectsModel> projects = [
 
   // kryptal
   ProjectsModel(
-    5,
+    6,
     "Designing KRYPTAL - A Centralized Cryptocurrency Trading Platform",
     "A secured and transparent web3 centralized cryptocurrency trading platform that leverages blockchain technology for seamless trading",
     "assets/images/kryptal.png",
@@ -120,7 +142,7 @@ List<ProjectsModel> projects = [
 
   // maiz
   ProjectsModel(
-    6,
+    7,
     "MIEZ Beauty Lounge and Spa Saloon - UI/UX Case Study",
     "Discover the ultimate oasis of relaxation and rejuvenation at MIEZ Spa and Beauty Salon.",
     "assets/images/miez.png",

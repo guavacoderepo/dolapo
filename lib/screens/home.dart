@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
 
       drawer: mobile
           ? Drawer(
+            
               child: ListView(children: [
                 navButton("Home", () => push(context, const HomePage()),
                     btnColor: blue),
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 const Spacer(flex: 1),
                                 h400(
-                                    "Hi, I'm Dolapo, a UI/UX designer dedicated to crafting captivating digital experiences. With a user-centered approach and a passion for problem-solving, I create stunning interfaces that delight users. ",
+                                    "Hi, I'm Dolapo, a versatile UI/UX designer and UX writer. With a keen eye for aesthetics and a passion for crafting seamless user experiences, I bring creative designs to life while ensuring intuitive and engaging content that resonates with users.",
                                     size > maxdestop ? 28 : 23),
                                 const Spacer(flex: 1),
                                 h400(
@@ -115,7 +116,8 @@ class _HomePageState extends State<HomePage> {
                                 submitbutton(
                                   "View my resume",
                                   () => _launchUrl(
-                                      "https://resume.io/r/JGGsUqAv7"),
+                                    "https://resume.io/r/rDEGY0HH2",
+                                  ),
                                 )
                               ],
                             ),
@@ -283,17 +285,243 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           } else {
-            return Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+// mobile view
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  h400("Mobile view coming soon...", 20, color: blue),
-                  horizontal(5),
-                  CircularProgressIndicator(
-                    color: blue,
-                    strokeWidth: 2,
+                  // top card
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: double.infinity,
+                    // padding: const EdgeInsets.all(45),
+                    decoration: BoxDecoration(
+                      color: appColor,
+                      image: const DecorationImage(
+                        image: AssetImage("assets/images/topdooo.png"),
+                      ),
+                    ),
+                    // row contents
+                    child: Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // image section
+                        Container(
+                          height: 250,
+                          width: 400,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                            image: DecorationImage(
+                              image: AssetImage(dollyimg),
+                            ),
+                          ),
+                        ),
+                        // text section of row
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          child: h400(
+                              "Hi, I'm Dolapo, a versatile UI/UX designer and UX writer. With a keen eye for aesthetics and a passion for crafting seamless user experiences, I bring creative designs to life while ensuring intuitive and engaging content that resonates with users.",
+                              18),
+                        ),
+                        const Spacer(flex: 1),
+                        h400("Let's explore the digital world together!", 15,
+                            color: blue),
+                        const Spacer(flex: 1),
+                        submitbutton(
+                          "View my resume",
+                          () => _launchUrl("https://resume.io/r/JGGsUqAv7"),
+                        ),
+                        const Spacer(flex: 1),
+                      ],
+                    ),
+                  ),
+// title text
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 27, vertical: 20),
+                    child: h500(
+                      "My projects and case studies",
+                      25,
+                      color: blue,
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: projectList!
+                          .map((e) => Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // thumbnail section
+                                  Container(
+                                    width: double.infinity,
+                                    height: cnx.maxWidth * 0.5,
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 15),
+                                    padding: const EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      color: blue.withOpacity(0.1),
+                                    ),
+                                    child: Image.asset(
+                                      e.img,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+
+                                  // description section
+                                  Container(
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    height: cnx.maxWidth * 0.3,
+                                    width: double.infinity,
+                                    // color: Colors.amber,
+                                    // padding:
+                                    //     EdgeInsets.symmetric(horizontal: 30),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        // title
+                                        h500(e.title, 18, color: blue),
+                                        h500(
+                                          e.desc,
+                                          16,
+                                          color: appColor.withOpacity(0.7),
+                                        ),
+
+                                        Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: InkWell(
+                                            onTap: e.link
+                                                ? () => _launchUrl(
+                                                    "https://caselaw.moj.dl.gov.ng/")
+                                                : () => push(
+                                                    context, Viewproject(e)),
+                                            focusColor: transparent,
+                                            hoverColor: transparent,
+                                            child: Row(
+                                              children: [
+                                                e.link
+                                                    ? Icon(Icons.link,
+                                                        color: btnColor,
+                                                        size: 20)
+                                                    : Icon(
+                                                        Icons
+                                                            .mode_edit_outline_outlined,
+                                                        size: 20,
+                                                        color: btnColor),
+                                                horizontal(5),
+                                                e.link
+                                                    ? h500("Link", 15,
+                                                        color: blue)
+                                                    : h500(
+                                                        "View case study",
+                                                        15,
+                                                        color: blue,
+                                                      ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ))
+                          .toList(),
+                    ),
+                  ),
+// footer section
+                  Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    color: appColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 70),
+                          child: h400(
+                            "Ready to bring your digital vision to life? Let's collaborate and create something amazing together. Get in touch with me today!",
+                            12,
+                            align: TextAlign.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 140),
+                          child: Divider(
+                            color: grey,
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            shadowColor: transparent,
+                            backgroundColor: transparent,
+                            foregroundColor: transparent,
+                          ),
+                          onPressed: () async => await canLaunchUrl(Uri(
+                            scheme: 'mailto',
+                            path: 'Anikejikareem@gmail.com',
+                          )),
+                          icon: Icon(
+                            Icons.mail_outline_outlined,
+                            color: blue,
+                          ),
+                          label:
+                              h400("Anikejikareem@gmail.com", 15, color: blue),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () => _launchUrl(
+                                "https://mobile.twitter.com/Dolapo_writes",
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: transparent,
+                                backgroundColor: transparent,
+                                foregroundColor: transparent,
+                              ),
+                              child: Image.asset(
+                                "assets/icons/Twitter.png",
+                                height: 23,
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () => _launchUrl(
+                                  "https://www.linkedin.com/in/dolapouiuxdesigner"),
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: transparent,
+                                backgroundColor: transparent,
+                                foregroundColor: transparent,
+                              ),
+                              child: Image.asset(
+                                "assets/icons/LinkedIn .png",
+                                height: 23,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   )
+
+// widgets here
                 ],
               ),
             );
@@ -354,8 +582,9 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: [
                     e.link
-                        ? Icon(Icons.link, color: grey)
-                        : Icon(Icons.mode_edit_outline_outlined, color: grey),
+                        ? Icon(Icons.link, color: btnColor)
+                        : Icon(Icons.mode_edit_outline_outlined,
+                            color: btnColor),
                     horizontal(5),
                     e.link
                         ? h500("Link", size > maxdestop ? 22 : 18, color: blue)

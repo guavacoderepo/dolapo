@@ -46,42 +46,88 @@ class _ViewprojectState extends State<Viewproject> {
 
       // body section
 
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 80),
+      body: LayoutBuilder(
+        builder: (context, ctx) {
+          if (ctx.maxWidth > maxdestop) {
+            return SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  h500(widget.projectItem.title, 40, color: blue),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 80),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        h500(widget.projectItem.title, 40, color: blue),
+                        vertical(20),
+                        h400("Role: ${widget.projectItem.meta.role}", 25),
+                        vertical(20),
+                        h400("Duration: ${widget.projectItem.meta.duration}",
+                            25),
+                        vertical(20),
+                        h400("Outcome: ${widget.projectItem.meta.outcome}", 25),
+                      ],
+                    ),
+                  ),
                   vertical(20),
-                  h400("Role: ${widget.projectItem.meta.role}", 25),
-                  vertical(20),
-                  h400("Duration: ${widget.projectItem.meta.duration}", 25),
-                  vertical(20),
-                  h400("Outcome: ${widget.projectItem.meta.outcome}", 25),
+
+                  // list images
+                  Column(
+                    children: widget.projectItem.meta.gallery
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 100, vertical: 10),
+                            child: Image.asset(e),
+                          ),
+                        )
+                        .toList(),
+                  )
                 ],
               ),
-            ),
-            vertical(20),
-
-            // list images
-            Column(
-              children: widget.projectItem.meta.gallery
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 100, vertical: 10),
-                      child: Image.asset(e),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        h500(widget.projectItem.title, 22, color: blue),
+                        vertical(20),
+                        h400("Role: ${widget.projectItem.meta.role}", 18),
+                        vertical(20),
+                        h400("Duration: ${widget.projectItem.meta.duration}",
+                            18),
+                        vertical(20),
+                        h400("Outcome: ${widget.projectItem.meta.outcome}", 18),
+                      ],
                     ),
+                  ),
+                  vertical(20),
+
+                  // list images
+                  Column(
+                    children: widget.projectItem.meta.gallery
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 5),
+                            child: Image.asset(e),
+                          ),
+                        )
+                        .toList(),
                   )
-                  .toList(),
-            )
-          ],
-        ),
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
   }

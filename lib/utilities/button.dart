@@ -16,11 +16,7 @@ navButton(title, VoidCallback onPressed,
       ),
     );
 
-submitbutton(
-  title,
-  VoidCallback onPressed,
-) =>
-    ElevatedButton(
+submitbutton(title, VoidCallback onPressed) => ElevatedButton(
       onPressed: onPressed,
       child: h400(title, 19),
       // onHover: (value) =>  ,
@@ -29,7 +25,7 @@ submitbutton(
         backgroundColor: transparent,
         foregroundColor: transparent,
         shadowColor: transparent,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         shape: StadiumBorder(side: BorderSide(color: grey)),
       ),
     );
