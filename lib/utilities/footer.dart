@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 footer(context) => Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.2,
+      // height: MediaQuery.of(context).size.height * 0.2,
       padding: const EdgeInsets.symmetric(vertical: 10),
       color: appColor,
       child: Column(
@@ -78,6 +78,7 @@ footer(context) => Container(
         ],
       ),
     );
+
 
 Future<void> _launchUrl(url) async {
   if (!await launchUrl(Uri.parse(url))) {

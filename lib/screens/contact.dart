@@ -9,7 +9,6 @@ import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:flutter/material.dart';
 
-
 class Contact extends StatefulWidget {
   const Contact({super.key});
 
@@ -140,8 +139,7 @@ class _ContactState extends State<Contact> {
                     child: Column(
                       children: [
                         vertical(20),
-                        h500("Contact me", size > maxdestop ? 40 : 30,
-                            color: blue),
+                        h500("Contact me", 25, color: blue),
                         vertical(30),
                         h400(
                           "I would love to hear from you! Whether you have a project in mind, want to discuss a collaboration, or simply have a question, feel free to reach out.",
@@ -168,7 +166,7 @@ class _ContactState extends State<Contact> {
                   vertical(100),
                   // footer section
 
-                  footer(context)
+                  footer(context),
 
                   // add widges here.....
                 ],
@@ -180,4 +178,3 @@ class _ContactState extends State<Contact> {
     );
   }
 }
-

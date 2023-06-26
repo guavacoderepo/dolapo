@@ -84,7 +84,25 @@ class _ViewprojectState extends State<Viewproject> {
                           ),
                         )
                         .toList(),
-                  )
+                  ),
+// check if case study exit for this design
+                  widget.projectItem.isCaseStudy
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: navButton(
+                                  "View Full Case Study On Behance",
+                                  () =>
+                                      _launchUrl(widget.projectItem.caseStudy),
+                                  size: 15,
+                                  btnColor: blue),
+                            ),
+                          ),
+                        )
+                      : vertical(10),
                 ],
               ),
             );

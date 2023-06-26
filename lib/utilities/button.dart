@@ -16,9 +16,10 @@ navButton(title, VoidCallback onPressed,
       ),
     );
 
-submitbutton(title, VoidCallback onPressed) => ElevatedButton(
+submitbutton(title, VoidCallback onPressed, {double size = 19}) =>
+    ElevatedButton(
       onPressed: onPressed,
-      child: h400(title, 19),
+      child: h400(title, size),
       // onHover: (value) =>  ,
 
       style: ElevatedButton.styleFrom(

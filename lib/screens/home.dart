@@ -246,9 +246,10 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // top card
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    // height: MediaQuery.of(context).size.height * 0.8,
                     width: double.infinity,
-                    // padding: const EdgeInsets.all(45),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     decoration: BoxDecoration(
                       color: appColor,
                       image: const DecorationImage(
@@ -261,36 +262,30 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // image section
-                        Container(
-                          height: 250,
-                          width: 400,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage(dollyimg),
-                            ),
-                          ),
+
+                        Image.asset(
+                          dollyimg,
+                          height: MediaQuery.of(context).size.height * 0.35,
                         ),
+
                         // text section of row
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          padding: EdgeInsets.symmetric(horizontal: 30),
                           child: h400(
-                              "Hi, I'm Dolapo, a versatile UI/UX designer and UX writer. With a keen eye for aesthetics and a passion for crafting seamless user experiences, I bring creative designs to life while ensuring intuitive and engaging content that resonates with users.",
-                              18,
-                              align: TextAlign.center),
+                            "Hi, I'm Dolapo, a versatile UI/UX designer and UX writer. With a keen eye for aesthetics and a passion for crafting seamless user experiences, I bring creative designs to life while ensuring intuitive and engaging content that resonates with users.",
+                            18,
+                            align: TextAlign.center,
+                          ),
                         ),
-                        const Spacer(flex: 1),
+
+                        vertical(20),
                         h400("Let's explore the digital world together!", 15,
                             color: blue),
-                        const Spacer(flex: 1),
-                        submitbutton(
-                          "View my resume",
-                          () => _launchUrl("https://resume.io/r/JGGsUqAv7"),
-                        ),
-                        const Spacer(flex: 1),
+                        vertical(20),
+                        submitbutton("View my resume",
+                            () => _launchUrl("https://resume.io/r/JGGsUqAv7"),
+                            size: 15),
+                        vertical(20),
                       ],
                     ),
                   ),
@@ -300,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                         horizontal: 27, vertical: 20),
                     child: h500(
                       "My projects and case studies",
-                      25,
+                      20,
                       color: blue,
                     ),
                   ),
@@ -336,7 +331,7 @@ class _HomePageState extends State<HomePage> {
                                   Container(
                                     margin:
                                         const EdgeInsets.symmetric(vertical: 6),
-                                    height: cnx.maxWidth * 0.3,
+                                    // height: cnx.maxWidth * 0.3,
                                     width: double.infinity,
                                     // color: Colors.amber,
                                     // padding:
