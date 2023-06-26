@@ -5,6 +5,7 @@ import 'package:dolapo/utilities/button.dart';
 import 'package:dolapo/utilities/fonts.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Viewproject extends StatefulWidget {
   final ProjectsModel projectItem;
@@ -94,18 +95,18 @@ class _ViewprojectState extends State<Viewproject> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        h500(widget.projectItem.title, 22, color: blue),
-                        vertical(20),
-                        h400("Role: ${widget.projectItem.meta.role}", 18),
-                        vertical(20),
+                        h500(widget.projectItem.title, 21, color: blue),
+                        vertical(10),
+                        h400("Role: ${widget.projectItem.meta.role}", 17),
+                        vertical(10),
                         h400("Duration: ${widget.projectItem.meta.duration}",
-                            18),
-                        vertical(20),
-                        h400("Outcome: ${widget.projectItem.meta.outcome}", 18),
+                            17),
+                        vertical(10),
+                        h400("Outcome: ${widget.projectItem.meta.outcome}", 17),
                       ],
                     ),
                   ),
@@ -122,7 +123,25 @@ class _ViewprojectState extends State<Viewproject> {
                           ),
                         )
                         .toList(),
-                  )
+                  ),
+// check if case study exit for this design
+                  widget.projectItem.isCaseStudy
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: navButton(
+                                  "View Full Case Study On Behance",
+                                  () =>
+                                      _launchUrl(widget.projectItem.caseStudy),
+                                  size: 15,
+                                  btnColor: blue),
+                            ),
+                          ),
+                        )
+                      : vertical(10),
                 ],
               ),
             );
@@ -130,5 +149,11 @@ class _ViewprojectState extends State<Viewproject> {
         },
       ),
     );
+  }
+}
+
+Future<void> _launchUrl(url) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
   }
 }

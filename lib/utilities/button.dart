@@ -3,10 +3,10 @@ import 'package:dolapo/utilities/fonts.dart';
 import 'package:flutter/material.dart';
 
 navButton(title, VoidCallback onPressed,
-        {Color btnColor = const Color(0xffD9D9D9)}) =>
+        {Color btnColor = const Color(0xffD9D9D9), double size = 19}) =>
     ElevatedButton(
       onPressed: onPressed,
-      child: h400(title, 19, color: btnColor),
+      child: h400(title, size, color: btnColor),
       // onHover: (value) =>  ,
 
       style: ElevatedButton.styleFrom(

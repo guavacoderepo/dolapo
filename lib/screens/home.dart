@@ -6,6 +6,7 @@ import 'package:dolapo/screens/view.dart';
 import 'package:dolapo/utilities/fonts.dart';
 import 'package:dolapo/constants/images.dart';
 import 'package:dolapo/utilities/button.dart';
+import 'package:dolapo/utilities/footer.dart';
 import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:dolapo/variables/projects.dart';
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: light,
       // appabr section
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: mobile ? true : false,
         title: Image.asset(logo, fit: BoxFit.contain, height: 40),
         actions: mobile
             ? null
@@ -60,14 +61,35 @@ class _HomePageState extends State<HomePage> {
 
       drawer: mobile
           ? Drawer(
-            
-              child: ListView(children: [
-                navButton("Home", () => push(context, const HomePage()),
-                    btnColor: blue),
-                navButton("About me", () => push(context, const About())),
-                navButton("Contact me", () => push(context, const Contact())),
-                navButton("Playground", () {}),
-              ]),
+              width: 200,
+              // backgroundColor: appColor.withOpacity(0.01),
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: appColor,
+                    ),
+                    child: Image.asset("assets/images/logo.png"),
+                  ),
+                  ListTile(
+                    title: h400("Home", 19, color: blue),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  ListTile(
+                    title: h400("About me", 19, color: btnColor),
+                    onTap: () => push(context, const About()),
+                  ),
+                  ListTile(
+                    title: h400("Contact me", 19, color: btnColor),
+                    onTap: () => push(context, const Contact()),
+                  ),
+                  ListTile(
+                    title: h400("Playground", 19, color: btnColor),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             )
           : null,
       body: LayoutBuilder(
@@ -210,76 +232,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 // footer section
-                  Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    color: appColor,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 70),
-                          child: h400(
-                            "Ready to bring your digital vision to life? Let's collaborate and create something amazing together. Get in touch with me today!",
-                            18,
-                            align: TextAlign.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 140),
-                          child: Divider(
-                            color: grey,
-                          ),
-                        ),
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            shadowColor: transparent,
-                            backgroundColor: transparent,
-                            foregroundColor: transparent,
-                          ),
-                          onPressed: () async => await canLaunchUrl(Uri(
-                            scheme: 'mailto',
-                            path: 'Anikejikareem@gmail.com',
-                          )),
-                          icon: Icon(
-                            Icons.mail_outline_outlined,
-                            color: blue,
-                          ),
-                          label:
-                              h400("Anikejikareem@gmail.com", 18, color: blue),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () => _launchUrl(
-                                  "https://mobile.twitter.com/Dolapo_writes"),
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: transparent,
-                                backgroundColor: transparent,
-                                foregroundColor: transparent,
-                              ),
-                              child: Image.asset("assets/icons/Twitter.png"),
-                            ),
-                            ElevatedButton(
-                              onPressed: () => _launchUrl(
-                                  "https://www.linkedin.com/in/dolapouiuxdesigner"),
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: transparent,
-                                backgroundColor: transparent,
-                                foregroundColor: transparent,
-                              ),
-                              child: Image.asset("assets/icons/LinkedIn .png"),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-
+                  footer(context)
 // widgets here
                 ],
               ),
@@ -326,7 +279,8 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.symmetric(horizontal: 40),
                           child: h400(
                               "Hi, I'm Dolapo, a versatile UI/UX designer and UX writer. With a keen eye for aesthetics and a passion for crafting seamless user experiences, I bring creative designs to life while ensuring intuitive and engaging content that resonates with users.",
-                              18),
+                              18,
+                              align: TextAlign.center),
                         ),
                         const Spacer(flex: 1),
                         h400("Let's explore the digital world together!", 15,
@@ -404,16 +358,15 @@ class _HomePageState extends State<HomePage> {
                                         Align(
                                           alignment: Alignment.bottomRight,
                                           child: InkWell(
-                                            onTap: e.link
-                                                ? () => _launchUrl(
-                                                    "https://caselaw.moj.dl.gov.ng/")
+                                            onTap: e.isLink
+                                                ? () => _launchUrl(e.link)
                                                 : () => push(
                                                     context, Viewproject(e)),
                                             focusColor: transparent,
                                             hoverColor: transparent,
                                             child: Row(
                                               children: [
-                                                e.link
+                                                e.isLink
                                                     ? Icon(Icons.link,
                                                         color: btnColor,
                                                         size: 20)
@@ -423,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                                                         size: 20,
                                                         color: btnColor),
                                                 horizontal(5),
-                                                e.link
+                                                e.isLink
                                                     ? h500("Link", 15,
                                                         color: blue)
                                                     : h500(
@@ -444,82 +397,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 // footer section
-                  Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    color: appColor,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 70),
-                          child: h400(
-                            "Ready to bring your digital vision to life? Let's collaborate and create something amazing together. Get in touch with me today!",
-                            12,
-                            align: TextAlign.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 140),
-                          child: Divider(
-                            color: grey,
-                          ),
-                        ),
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            shadowColor: transparent,
-                            backgroundColor: transparent,
-                            foregroundColor: transparent,
-                          ),
-                          onPressed: () async => await canLaunchUrl(Uri(
-                            scheme: 'mailto',
-                            path: 'Anikejikareem@gmail.com',
-                          )),
-                          icon: Icon(
-                            Icons.mail_outline_outlined,
-                            color: blue,
-                          ),
-                          label:
-                              h400("Anikejikareem@gmail.com", 15, color: blue),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () => _launchUrl(
-                                "https://mobile.twitter.com/Dolapo_writes",
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: transparent,
-                                backgroundColor: transparent,
-                                foregroundColor: transparent,
-                              ),
-                              child: Image.asset(
-                                "assets/icons/Twitter.png",
-                                height: 23,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () => _launchUrl(
-                                  "https://www.linkedin.com/in/dolapouiuxdesigner"),
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: transparent,
-                                backgroundColor: transparent,
-                                foregroundColor: transparent,
-                              ),
-                              child: Image.asset(
-                                "assets/icons/LinkedIn .png",
-                                height: 23,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
+                  footer(context)
 
 // widgets here
                 ],
@@ -574,19 +452,19 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               width: cnx.maxWidth * 0.4,
               child: InkWell(
-                onTap: e.link
-                    ? () => _launchUrl("https://caselaw.moj.dl.gov.ng/")
+                onTap: e.isLink
+                    ? () => _launchUrl(e.link)
                     : () => push(context, Viewproject(e)),
                 focusColor: transparent,
                 hoverColor: transparent,
                 child: Row(
                   children: [
-                    e.link
+                    e.isLink
                         ? Icon(Icons.link, color: btnColor)
                         : Icon(Icons.mode_edit_outline_outlined,
                             color: btnColor),
                     horizontal(5),
-                    e.link
+                    e.isLink
                         ? h500("Link", size > maxdestop ? 22 : 18, color: blue)
                         : h500("View case study", size > maxdestop ? 22 : 18,
                             color: blue),

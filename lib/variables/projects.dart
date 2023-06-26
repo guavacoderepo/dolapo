@@ -1,45 +1,51 @@
 import 'package:dolapo/models/projectsModel.dart';
 
 List<ProjectsModel> projects = [
-  // maiz
+  // clrs
   ProjectsModel(
-    0,
-    "CLRS - Case Law Repository System",
-    "Experience the ultimate digital case law repository system, providing seamless access to a vast collection of legal resources",
-    "assets/images/clrs.png",
-    Metas("", "", "", []),
-    true,
-  ),
+      0,
+      "CLRS - Case Law Repository System",
+      "Experience the ultimate digital case law repository system, providing seamless access to a vast collection of legal resources",
+      "assets/images/clrs.png",
+      Metas("", "", "", []),
+      true,
+      "https://caselaw.moj.dl.gov.ng/",
+      false,
+      null),
 // stokopedia
   ProjectsModel(
-      1,
-      "STOCKOPEDIA: A stock investment mobile app",
-      "Stockopedia is a mobile app that helps users to invest smarter and better",
-      "assets/images/stockopedia.png",
-      Metas("2 weeks", "Sole UI/UX Designer", "Research, UI/UX Design", [
-        "assets/prj/stk1.png",
-        "assets/prj/stk2.png",
-        "assets/prj/stk3.png",
-        "assets/prj/stk4.png",
-        "assets/prj/stk5.png",
-        "assets/prj/stk6.png",
-        "assets/prj/stk7.png",
-        "assets/prj/stk8.png",
-        "assets/prj/stk9.png",
-        "assets/prj/stk10.png",
-        "assets/prj/stk11.png",
-        "assets/prj/stk12.png",
-        "assets/prj/stk13.png",
-        "assets/prj/stk14.png",
-        "assets/prj/stk15.png",
-        "assets/prj/stk16.png",
-        "assets/prj/stk17.png",
-        "assets/prj/stk18.png",
-        "assets/prj/stk19.png",
-        "assets/prj/stk20.png",
-        "assets/prj/stk21.png"
-      ]),
-      false),
+    1,
+    "STOCKOPEDIA: A stock investment mobile app",
+    "Stockopedia is a mobile app that helps users to invest smarter and better",
+    "assets/images/stockopedia.png",
+    Metas("2 weeks", "Sole UI/UX Designer", "Research, UI/UX Design", [
+      "assets/prj/stk1.png",
+      "assets/prj/stk2.png",
+      "assets/prj/stk3.png",
+      "assets/prj/stk4.png",
+      "assets/prj/stk5.png",
+      "assets/prj/stk6.png",
+      "assets/prj/stk7.png",
+      "assets/prj/stk8.png",
+      "assets/prj/stk9.png",
+      "assets/prj/stk10.png",
+      "assets/prj/stk11.png",
+      "assets/prj/stk12.png",
+      "assets/prj/stk13.png",
+      "assets/prj/stk14.png",
+      "assets/prj/stk15.png",
+      "assets/prj/stk16.png",
+      "assets/prj/stk17.png",
+      "assets/prj/stk18.png",
+      "assets/prj/stk19.png",
+      "assets/prj/stk20.png",
+      "assets/prj/stk21.png"
+    ]),
+    false,
+    null,
+    false,
+    null,
+  ),
 
 // healthpal
   ProjectsModel(
@@ -70,6 +76,9 @@ List<ProjectsModel> projects = [
       "assets/prj/health19.png"
     ]),
     false,
+    null,
+    false,
+    null,
   ),
 
   // healthpal mobile
@@ -92,6 +101,9 @@ List<ProjectsModel> projects = [
       "assets/prj/hpal10.png",
     ]),
     false,
+    null,
+    false,
+    null,
   ),
 
   // feyoo web
@@ -108,6 +120,9 @@ List<ProjectsModel> projects = [
       "assets/prj/foo5.png",
     ]),
     false,
+    null,
+    false,
+    null,
   ),
 
   // fooyee mobile
@@ -116,14 +131,22 @@ List<ProjectsModel> projects = [
     "Fooyee: Designing a Hotel Booking Website for Unforgettable Experiences (Mobile version) ",
     "A hotel booking website that offers a convenient way to book the perfect accommodations ",
     "assets/images/fooyee2.png",
-    Metas("2 weeks", "Sole UI/UX Designer", "Research, UI/UX Design", [
-      "assets/prj/foo11.png",
-      "assets/prj/foo12.png",
-      "assets/prj/foo13.png",
-      "assets/prj/foo14.png",
-      "assets/prj/foo15.png",
-    ]),
+    Metas(
+      "2 weeks",
+      "Sole UI/UX Designer",
+      "Research, UI/UX Design",
+      [
+        "assets/prj/foo11.png",
+        "assets/prj/foo12.png",
+        "assets/prj/foo13.png",
+        "assets/prj/foo14.png",
+        "assets/prj/foo15.png",
+      ],
+    ),
     false,
+    null,
+    false,
+    null,
   ),
 
   // kryptal
@@ -138,6 +161,9 @@ List<ProjectsModel> projects = [
       "assets/prj/ky3.png",
     ]),
     false,
+    null,
+    true,
+    "https://www.behance.net/gallery/153877161/Centralized-trading-platform",
   ),
 
   // maiz
@@ -157,5 +183,8 @@ List<ProjectsModel> projects = [
       "assets/prj/mz8.png",
     ]),
     false,
+    null,
+    false,
+    null,
   ),
 ];

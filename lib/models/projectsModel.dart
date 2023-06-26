@@ -1,10 +1,13 @@
 class ProjectsModel {
   int id;
   String title, desc, img;
-  bool link;
+  bool isLink;
+  String? link;
+  bool isCaseStudy;
+  String? caseStudy;
   Metas meta;
 
-  ProjectsModel(this.id, this.title, this.desc, this.img, this.meta, this.link);
+  ProjectsModel(this.id, this.title, this.desc, this.img, this.meta, this.isLink, this.link, this.isCaseStudy, this.caseStudy);
 }
 
 class Metas {

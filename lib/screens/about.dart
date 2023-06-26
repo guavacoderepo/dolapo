@@ -4,10 +4,10 @@ import 'package:dolapo/screens/contact.dart';
 import 'package:dolapo/screens/home.dart';
 import 'package:dolapo/utilities/button.dart';
 import 'package:dolapo/utilities/fonts.dart';
+import 'package:dolapo/utilities/footer.dart';
 import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 
 class About extends StatefulWidget {
@@ -31,7 +31,7 @@ class _AboutState extends State<About> {
       backgroundColor: appColor,
       // appabr section
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: mobile ? true : false,
         title: Image.asset(logo, fit: BoxFit.contain, height: 40),
         actions: mobile
             ? null
@@ -50,13 +50,35 @@ class _AboutState extends State<About> {
 
       drawer: mobile
           ? Drawer(
-              child: ListView(children: [
-                navButton("Home", () => push(context, const HomePage())),
-                navButton("About me", () => push(context, const About()),
-                    btnColor: blue),
-                navButton("Contact me", () => push(context, const Contact())),
-                navButton("Playground", () {}),
-              ]),
+              width: 200,
+              // backgroundColor: appColor.withOpacity(0.01),
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: appColor,
+                    ),
+                    child: Image.asset("assets/images/logo.png"),
+                  ),
+                  ListTile(
+                    title: h400("Home", 19, color: btnColor),
+                    onTap: () => push(context, const HomePage()),
+                  ),
+                  ListTile(
+                    title: h400("About me", 19, color: blue),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  ListTile(
+                    title: h400("Contact me", 19, color: btnColor),
+                    onTap: () => push(context, const Contact()),
+                  ),
+                  ListTile(
+                    title: h400("Playground", 19, color: btnColor),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             )
           : null,
       body: LayoutBuilder(
@@ -196,92 +218,121 @@ class _AboutState extends State<About> {
 
                   // footer section
 
-                  Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    color: appColor,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 70),
-                          child: h400(
-                            "Ready to bring your digital vision to life? Let's collaborate and create something amazing together. Get in touch with me today!",
-                            size > maxdestop ? 18 : 15,
-                            align: TextAlign.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 140),
-                          child: Divider(
-                            color: grey,
-                          ),
-                        ),
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            shadowColor: transparent,
-                            backgroundColor: transparent,
-                            foregroundColor: transparent,
-                          ),
-                          onPressed: () async => await canLaunchUrl(Uri(
-                            scheme: 'mailto',
-                            path: 'Anikejikareem@gmail.com',
-                          )),
-                          icon: Icon(
-                            Icons.mail_outline_outlined,
-                            color: blue,
-                          ),
-                          label:
-                              h400("Anikejikareem@gmail.com", 18, color: blue),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () => _launchUrl(
-                                  "https://mobile.twitter.com/Dolapo_writes"),
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: transparent,
-                                backgroundColor: transparent,
-                                foregroundColor: transparent,
-                              ),
-                              child: Image.asset("assets/icons/Twitter.png"),
-                            ),
-                            ElevatedButton(
-                              onPressed: () => _launchUrl(
-                                  "https://www.linkedin.com/in/dolapouiuxdesigner"),
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: transparent,
-                                backgroundColor: transparent,
-                                foregroundColor: transparent,
-                              ),
-                              child: Image.asset("assets/icons/LinkedIn .png"),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
+                  footer(context),
 
 // add widges here.....
                 ],
               ),
             );
           } else {
-            return Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // row section
                 children: [
-                  h400("Mobile view coming soon...", 20, color: blue),
-                  horizontal(5),
-                  CircularProgressIndicator(
-                    color: blue,
-                    strokeWidth: 2,
-                  )
+                  SizedBox(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    child: Image.asset(
+                      dollyimg2,
+                      height: cnx.maxHeight * 0.7,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+
+                  vertical(20),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: Column(
+                      children: [
+                        h400(
+                          "Hi, I'm Dolapo, a UI/UX designer dedicated to crafting captivating digital experiences. With a user-centered approach and a passion for problem-solving, I create stunning interfaces that delight users.",
+                          17,
+                        ),
+                        vertical(10),
+                        h400(
+                          "With expertise in user research, wireframing, polished interface design and UX Writing, I strive to blend aesthetics and functionality seamlessly.",
+                          17,
+                        ),
+                        vertical(10),
+                        h400(
+                          "I understand the power of combining design and engaging content as a professional, to create an innovative product that user will find useful",
+                          17,
+                        ),
+                        vertical(10),
+                        h400(
+                          "Collaboration, empathy, and a deep understanding of users drive my design process. ",
+                          17,
+                        ),
+                        vertical(10),
+                        h400(
+                          "Let's collaborate to bring your digital vision to life and create exceptional designs together. Reach out to me today.",
+                          17,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 20),
+                    child: h500("Recommendations", 18, color: blue),
+                  ),
+//
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: DynamicHeightGridView(
+                        itemCount: 4,
+                        crossAxisCount: 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        builder: (ctx, index) {
+                          return SizedBox(
+                            child: Image.asset(
+                              "assets/images/rec$index.png",
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        }),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 20),
+                    child: h500(
+                      "Certifications",
+                      18,
+                      color: blue,
+                    ),
+                  ),
+//
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: DynamicHeightGridView(
+                        itemCount: 2,
+                        crossAxisCount: 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        builder: (ctx, index) {
+                          return SizedBox(
+                            child: Image.asset(
+                              "assets/images/cert$index.png",
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        }),
+                  ),
+
+// footer section
+
+                  footer(context)
+
+// add widges here.....
                 ],
               ),
             );
@@ -291,20 +342,3 @@ class _AboutState extends State<About> {
     );
   }
 }
-
-Future<void> _launchUrl(_url) async {
-  if (!await launchUrl(Uri.parse(_url))) {
-    throw Exception('Could not launch $_url');
-  }
-}
-
-grideView() => DynamicHeightGridView(
-    itemCount: 120,
-    crossAxisCount: 3,
-    crossAxisSpacing: 10,
-    mainAxisSpacing: 10,
-    builder: (ctx, index) {
-      return SizedBox(
-        child: Image.asset("assets/images/IMG_2694 1.png"),
-      );
-    });
