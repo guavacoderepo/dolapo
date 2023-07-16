@@ -338,8 +338,10 @@ class _HomePageState extends State<HomePage> {
                                                 BorderRadius.circular(16),
                                             color: blue.withOpacity(0.1),
                                           ),
-                                          child: Image.asset(
-                                            e.thumbnail!,
+                                          child: FadeInImage.assetNetwork(
+                                            placeholder:
+                                                "assets/images/p-h.png",
+                                            image: e.thumbnail!,
                                             fit: BoxFit.contain,
                                           ),
                                         ),
@@ -372,7 +374,7 @@ class _HomePageState extends State<HomePage> {
                                                 alignment:
                                                     Alignment.bottomRight,
                                                 child: InkWell(
-                                                  onTap: e.isLink!
+                                                  onTap: !e.isLink!
                                                       ? () => _launchUrl(e.link)
                                                       : () => push(context,
                                                           Viewproject(e)),
@@ -439,8 +441,9 @@ class _HomePageState extends State<HomePage> {
           borderRadius: BorderRadius.circular(16),
           color: blue.withOpacity(0.1),
         ),
-        child: Image.asset(
-          e.thumbnail!,
+        child: FadeInImage.assetNetwork(
+          placeholder: "assets/images/p-h.png",
+          image: e.thumbnail!,
           fit: BoxFit.contain,
         ),
       );

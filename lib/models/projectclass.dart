@@ -11,7 +11,7 @@ Future<ProjectsModel> getprojects() async {
     var res = await client.get(uri);
 
     if (res.statusCode == 200) {
-      var result = json.decode(res.body);
+      var result = ProjectsModel.fromMap(json.decode(res.body));
 
       return result;
     } else {

@@ -67,7 +67,8 @@ class _ViewprojectState extends State<Viewproject> {
                         h400("Duration: ${widget.projectItem.meta!.duration}",
                             25),
                         vertical(20),
-                        h400("Outcome: ${widget.projectItem.meta!.outcome}", 25),
+                        h400(
+                            "Outcome: ${widget.projectItem.meta!.outcome}", 25),
                       ],
                     ),
                   ),
@@ -124,7 +125,8 @@ class _ViewprojectState extends State<Viewproject> {
                         h400("Duration: ${widget.projectItem.meta!.duration}",
                             17),
                         vertical(10),
-                        h400("Outcome: ${widget.projectItem.meta!.outcome}", 17),
+                        h400(
+                            "Outcome: ${widget.projectItem.meta!.outcome}", 17),
                       ],
                     ),
                   ),
@@ -137,7 +139,11 @@ class _ViewprojectState extends State<Viewproject> {
                           (e) => Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
-                            child: Image.asset(e),
+                            child: FadeInImage.assetNetwork(
+                              placeholder: "assets/images/p-h.png",
+                              image: e,
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         )
                         .toList(),
