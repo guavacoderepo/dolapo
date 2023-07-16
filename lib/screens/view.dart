@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Viewproject extends StatefulWidget {
-  final ProjectsModel projectItem;
+  final Datum projectItem;
 
   const Viewproject(this.projectItem, {super.key});
 
@@ -62,12 +62,12 @@ class _ViewprojectState extends State<Viewproject> {
                       children: [
                         h500(widget.projectItem.title, 40, color: blue),
                         vertical(20),
-                        h400("Role: ${widget.projectItem.meta.role}", 25),
+                        h400("Role: ${widget.projectItem.meta!.role}", 25),
                         vertical(20),
-                        h400("Duration: ${widget.projectItem.meta.duration}",
+                        h400("Duration: ${widget.projectItem.meta!.duration}",
                             25),
                         vertical(20),
-                        h400("Outcome: ${widget.projectItem.meta.outcome}", 25),
+                        h400("Outcome: ${widget.projectItem.meta!.outcome}", 25),
                       ],
                     ),
                   ),
@@ -75,7 +75,7 @@ class _ViewprojectState extends State<Viewproject> {
 
                   // list images
                   Column(
-                    children: widget.projectItem.meta.gallery
+                    children: widget.projectItem.meta!.gallery!
                         .map(
                           (e) => Padding(
                             padding: const EdgeInsets.symmetric(
@@ -86,7 +86,7 @@ class _ViewprojectState extends State<Viewproject> {
                         .toList(),
                   ),
 // check if case study exit for this design
-                  widget.projectItem.isCaseStudy
+                  widget.projectItem.isCaseStudy!
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: SizedBox(
@@ -119,12 +119,12 @@ class _ViewprojectState extends State<Viewproject> {
                       children: [
                         h500(widget.projectItem.title, 21, color: blue),
                         vertical(10),
-                        h400("Role: ${widget.projectItem.meta.role}", 17),
+                        h400("Role: ${widget.projectItem.meta!.role}", 17),
                         vertical(10),
-                        h400("Duration: ${widget.projectItem.meta.duration}",
+                        h400("Duration: ${widget.projectItem.meta!.duration}",
                             17),
                         vertical(10),
-                        h400("Outcome: ${widget.projectItem.meta.outcome}", 17),
+                        h400("Outcome: ${widget.projectItem.meta!.outcome}", 17),
                       ],
                     ),
                   ),
@@ -132,7 +132,7 @@ class _ViewprojectState extends State<Viewproject> {
 
                   // list images
                   Column(
-                    children: widget.projectItem.meta.gallery
+                    children: widget.projectItem.meta!.gallery!
                         .map(
                           (e) => Padding(
                             padding: const EdgeInsets.symmetric(
@@ -143,7 +143,7 @@ class _ViewprojectState extends State<Viewproject> {
                         .toList(),
                   ),
 // check if case study exit for this design
-                  widget.projectItem.isCaseStudy
+                  widget.projectItem.isCaseStudy!
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: SizedBox(

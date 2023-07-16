@@ -1,4 +1,5 @@
 import 'package:dolapo/constants/colors.dart';
+import 'package:dolapo/models/projectclass.dart';
 import 'package:dolapo/models/projectsModel.dart';
 import 'package:dolapo/screens/about.dart';
 import 'package:dolapo/screens/contact.dart';
@@ -9,8 +10,8 @@ import 'package:dolapo/utilities/button.dart';
 import 'package:dolapo/utilities/footer.dart';
 import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
-import 'package:dolapo/variables/projects.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,11 +27,11 @@ class _HomePageState extends State<HomePage> {
   double maxdestop = 1040;
   double maxmobile = 855;
 
-  List<ProjectsModel>? projectList;
+  late Future projectList;
 
   @override
   void initState() {
-    projectList = projects;
+    projectList = getprojects();
     super.initState();
   }
 
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     size = MediaQuery.of(context).size.width;
     mobile = MediaQuery.of(context).size.width > maxmobile ? false : true;
     return Scaffold(
-      backgroundColor: light,
+//       backgroundColor: light,
       // appabr section
       appBar: AppBar(
         automaticallyImplyLeading: mobile ? true : false,
@@ -201,34 +202,45 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: size > maxdestop ? 90 : 50),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: projectList!
-                          .map(
-                            (e) => (e.id % 2) == 0
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      // thumbnail section
-                                      listImg(cnx, e),
-                                      // description section
-                                      listDescription(cnx, e),
-                                    ],
-                                  )
-                                : Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      // description section
-                                      listDescription(cnx, e),
-                                      // thumbnail section
-                                      listImg(cnx, e),
-                                    ],
-                                  ),
-                          )
-                          .toList(),
+                    child: FutureBuilder<ProjectsModel>(
+                      future: getprojects(),
+                      builder: (context, snap) {
+                        if (snap.hasData) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: snap.data!.data!
+                                .map(
+                                  (e) => (e.id) == 0
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // thumbnail section
+                                            listImg(cnx, e),
+                                            // description section
+                                            listDescription(cnx, e),
+                                          ],
+                                        )
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // description section
+                                            listDescription(cnx, e),
+                                            // thumbnail section
+                                            listImg(cnx, e),
+                                          ],
+                                        ),
+                                )
+                                .toList(),
+                          );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          );
+                        }
+                      },
                     ),
                   ),
 // footer section
@@ -302,93 +314,107 @@ class _HomePageState extends State<HomePage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: projectList!
-                          .map((e) => Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // thumbnail section
-                                  Container(
-                                    width: double.infinity,
-                                    height: cnx.maxWidth * 0.5,
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 15),
-                                    padding: const EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      color: blue.withOpacity(0.1),
-                                    ),
-                                    child: Image.asset(
-                                      e.img,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-
-                                  // description section
-                                  Container(
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 6),
-                                    // height: cnx.maxWidth * 0.3,
-                                    width: double.infinity,
-                                    // color: Colors.amber,
-                                    // padding:
-                                    //     EdgeInsets.symmetric(horizontal: 30),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                    child: FutureBuilder<ProjectsModel>(
+                      future: getprojects(),
+                      builder: (context, snap) {
+                        if (snap.hasData) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: snap.data!.data!
+                                .map((e) => Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // title
-                                        h500(e.title, 18, color: blue),
-                                        h500(
-                                          e.desc,
-                                          16,
-                                          color: appColor.withOpacity(0.7),
+                                        // thumbnail section
+                                        Container(
+                                          width: double.infinity,
+                                          height: cnx.maxWidth * 0.5,
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 15),
+                                          padding: const EdgeInsets.all(15),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                            color: blue.withOpacity(0.1),
+                                          ),
+                                          child: Image.asset(
+                                            e.thumbnail!,
+                                            fit: BoxFit.contain,
+                                          ),
                                         ),
 
-                                        Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: InkWell(
-                                            onTap: e.isLink
-                                                ? () => _launchUrl(e.link)
-                                                : () => push(
-                                                    context, Viewproject(e)),
-                                            focusColor: transparent,
-                                            hoverColor: transparent,
-                                            child: Row(
-                                              children: [
-                                                e.isLink
-                                                    ? Icon(Icons.link,
-                                                        color: btnColor,
-                                                        size: 20)
-                                                    : Icon(
-                                                        Icons
-                                                            .mode_edit_outline_outlined,
-                                                        size: 20,
-                                                        color: btnColor),
-                                                horizontal(5),
-                                                e.isLink
-                                                    ? h500("Link", 15,
-                                                        color: blue)
-                                                    : h500(
-                                                        "View case study",
-                                                        15,
-                                                        color: blue,
-                                                      ),
-                                              ],
-                                            ),
+                                        // description section
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 6),
+                                          // height: cnx.maxWidth * 0.3,
+                                          width: double.infinity,
+                                          // color: Colors.amber,
+                                          // padding:
+                                          //     EdgeInsets.symmetric(horizontal: 30),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              // title
+                                              h500(e.title, 18, color: blue),
+                                              h500(
+                                                e.description,
+                                                16,
+                                                color:
+                                                    appColor.withOpacity(0.7),
+                                              ),
+
+                                              Align(
+                                                alignment:
+                                                    Alignment.bottomRight,
+                                                child: InkWell(
+                                                  onTap: e.isLink!
+                                                      ? () => _launchUrl(e.link)
+                                                      : () => push(context,
+                                                          Viewproject(e)),
+                                                  focusColor: transparent,
+                                                  hoverColor: transparent,
+                                                  child: Row(
+                                                    children: [
+                                                      e.isLink!
+                                                          ? Icon(Icons.link,
+                                                              color: btnColor,
+                                                              size: 20)
+                                                          : Icon(
+                                                              Icons
+                                                                  .mode_edit_outline_outlined,
+                                                              size: 20,
+                                                              color: btnColor),
+                                                      horizontal(5),
+                                                      e.isLink!
+                                                          ? h500("Link", 15,
+                                                              color: blue)
+                                                          : h500(
+                                                              "View case study",
+                                                              15,
+                                                              color: blue,
+                                                            ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                        )
+                                        ),
                                       ],
-                                    ),
-                                  ),
-                                ],
-                              ))
-                          .toList(),
+                                    ))
+                                .toList(),
+                          );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          );
+                        }
+                      },
                     ),
                   ),
 // footer section
@@ -404,7 +430,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  listImg(cnx, ProjectsModel e) => Container(
+  listImg(cnx, Datum e) => Container(
         width: cnx.maxWidth * 0.4,
         height: cnx.maxWidth * 0.3,
         margin: const EdgeInsets.symmetric(vertical: 15),
@@ -414,17 +440,17 @@ class _HomePageState extends State<HomePage> {
           color: blue.withOpacity(0.1),
         ),
         child: Image.asset(
-          e.img,
+          e.thumbnail!,
           fit: BoxFit.contain,
         ),
       );
 
-  listDescription(cnx, ProjectsModel e) => Container(
+  listDescription(cnx, Datum e) => Container(
         margin: const EdgeInsets.symmetric(vertical: 15),
         height: cnx.maxWidth * 0.3,
         width: cnx.maxWidth * 0.425,
         // color: Colors.amber,
-        padding: (e.id % 2) == 0
+        padding: (e.id) == 0
             ? const EdgeInsets.only(left: 5)
             : const EdgeInsets.only(left: 10),
         child: Column(
@@ -439,7 +465,7 @@ class _HomePageState extends State<HomePage> {
             // description
             SizedBox(
               width: cnx.maxWidth * 0.4,
-              child: h500(e.desc, size > maxdestop ? 22 : 15,
+              child: h500(e.description, size > maxdestop ? 22 : 15,
                   color: appColor.withOpacity(0.7)),
             ),
             // view project
@@ -447,19 +473,19 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               width: cnx.maxWidth * 0.4,
               child: InkWell(
-                onTap: e.isLink
+                onTap: e.isLink!
                     ? () => _launchUrl(e.link)
                     : () => push(context, Viewproject(e)),
                 focusColor: transparent,
                 hoverColor: transparent,
                 child: Row(
                   children: [
-                    e.isLink
+                    e.isLink!
                         ? Icon(Icons.link, color: btnColor)
                         : Icon(Icons.mode_edit_outline_outlined,
                             color: btnColor),
                     horizontal(5),
-                    e.isLink
+                    e.isLink!
                         ? h500("Link", size > maxdestop ? 22 : 18, color: blue)
                         : h500("View case study", size > maxdestop ? 22 : 18,
                             color: blue),
