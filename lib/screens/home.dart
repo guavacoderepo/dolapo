@@ -11,7 +11,6 @@ import 'package:dolapo/utilities/footer.dart';
 import 'package:dolapo/utilities/router.dart';
 import 'package:dolapo/utilities/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -374,7 +373,7 @@ class _HomePageState extends State<HomePage> {
                                                 alignment:
                                                     Alignment.bottomRight,
                                                 child: InkWell(
-                                                  onTap: !e.isLink!
+                                                  onTap: e.isLink!
                                                       ? () => _launchUrl(e.link)
                                                       : () => push(context,
                                                           Viewproject(e)),
