@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: snap.data!.data!
                                 .map(
-                                  (e) => (e.id) == 0
+                                  (e) => (snap.data!.data!.indexOf(e) % 2) == 0
                                       ? Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,

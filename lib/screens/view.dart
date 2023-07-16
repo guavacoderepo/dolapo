@@ -81,7 +81,11 @@ class _ViewprojectState extends State<Viewproject> {
                           (e) => Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 100, vertical: 10),
-                            child: Image.asset(e),
+                            child: FadeInImage.assetNetwork(
+                              placeholder: "assets/images/p-h2.jpeg",
+                              image: e,
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         )
                         .toList(),
@@ -140,7 +144,7 @@ class _ViewprojectState extends State<Viewproject> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             child: FadeInImage.assetNetwork(
-                              placeholder: "assets/images/p-h.png",
+                              placeholder: "assets/images/p-h2.jpeg",
                               image: e,
                               fit: BoxFit.contain,
                             ),
